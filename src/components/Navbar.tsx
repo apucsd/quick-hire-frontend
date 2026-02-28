@@ -10,13 +10,7 @@ const Navbar = () => {
                 <div className="flex justify-between items-center h-20">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-3 group shrink-0">
-                        <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center relative shadow-lg shadow-primary/20 transition-transform group-hover:scale-105 overflow-hidden">
-                            <span className="absolute inset-0 bg-white/10 blur-sm"></span>
-                            <span className="text-white font-black text-xl relative z-10">Q</span>
-                        </div>
-                        <span className="text-2xl font-bold tracking-tight text-[#1E293B]">
-                            QuickHire
-                        </span>
+                        <img src="/logo.png" className="w-full h-[36px]" alt="logo" />
                     </Link>
 
                     {/* Desktop Navigation Links */}
@@ -48,7 +42,7 @@ const Navbar = () => {
                             <div className="w-[1px] h-8 bg-slate-200"></div>
                             <Link
                                 to="/signup"
-                                className="bg-primary hover:bg-primary-hover text-white px-8 py-3 rounded-sm text-[15px] font-bold shadow-xl shadow-primary/20 transition-all active:scale-95"
+                                className="bg-primary hover:bg-primary-hover text-white px-8 py-3 text-[15px] font-bold shadow-xl shadow-primary/20 transition-all active:scale-95"
                             >
                                 Sign Up
                             </Link>
