@@ -4,7 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 const HeroSection = () => {
 
     return (
-        <section className="relative min-h-[85vh] flex items-center pt-8 pb-16 overflow-hidden">
+        <section className="relative min-h-[85vh] flex items-center pt-8 sm:pb-16 md:pb-0 overflow-hidden">
             {/* Background Pattern */}
             <img
                 src="/bg-pattern.png"
