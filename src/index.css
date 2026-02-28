@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #4A3AFF;
+  --color-primary-hover: #3b2ecc;
+  --color-heading: #1A202C;
+  --color-body: #718096;
+  --color-bg-card: #F7FAFC;
+  --color-border-card: #E2E8F0;
+
+  --font-inter: "Inter", sans-serif;
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+@layer base {
+  body {
+    @apply font-inter text-body bg-white;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-heading font-bold;
+  }
+}
