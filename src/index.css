@@ -35,3 +35,7 @@
     @apply text-heading font-bold;
   }
 }
+
+button {
+  cursor: pointer;
+}
