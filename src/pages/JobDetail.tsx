@@ -92,7 +92,7 @@ const JobDetail = () => {
             <div className="flex flex-col lg:flex-row gap-12">
                 {/* Job Info */}
                 <div className="flex-grow">
-                    <div className="flex flex-col md:flex-row md:items-center gap-8 mb-12">
+                    <div className="flex flex-col md:flex-row md:items-center gap-4 md:p-8 mb-12">
                         <div className="w-24 h-24 bg-white border border-slate-100 rounded-[2rem] flex items-center justify-center p-4 shadow-xl shadow-slate-200/50">
                             <img
                                 src={job.logo}
@@ -114,12 +114,12 @@ const JobDetail = () => {
                     </div>
 
                     <div className="space-y-12">
-                        <section className="bg-white p-8 rounded-[2rem] border border-slate-100/50">
+                        <section className="bg-white p-4 md:p-8 rounded-[2rem] border border-slate-100/50">
                             <h3 className="text-2xl font-clash-display font-bold text-[#25324B] mb-6 border-b border-slate-50 pb-4">Description</h3>
                             <p className="text-[#515B6F] text-lg leading-relaxed whitespace-pre-wrap">{job.description}</p>
                         </section>
 
-                        <section className="bg-white p-8 rounded-[2rem] border border-slate-100/50">
+                        <section className="bg-white p-4 md:p-8 rounded-[2rem] border border-slate-100/50">
                             <h3 className="text-2xl font-clash-display font-bold text-[#25324B] mb-6 border-b border-slate-50 pb-4">Responsibilities</h3>
                             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {responsibilities.map((r, i) => (
@@ -137,7 +137,7 @@ const JobDetail = () => {
 
                 {/* Sidebar Card: Apply Form */}
                 <aside className="w-full lg:w-[450px] shrink-0">
-                    <div className="sticky top-24 p-8 rounded-[2.5rem] border border-slate-100 bg-white shadow-2xl shadow-slate-200/50">
+                    <div className="sticky top-24 p-4 md:p-8 rounded-[2.5rem] border border-slate-100 bg-white shadow-2xl shadow-slate-200/50">
                         <div className="mb-8">
                             <h3 className="text-2xl font-clash-display font-bold text-[#25324B] mb-2">Apply Now</h3>
                             <p className="text-[#515B6F]">Fill out the form below to apply for this position.</p>

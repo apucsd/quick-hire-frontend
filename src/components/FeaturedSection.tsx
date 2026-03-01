@@ -11,10 +11,10 @@ const FeaturedSection = () => {
     return (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className="flex justify-between items-center mb-12">
-                <h2 className="text-[32px] md:text-[48px] font-clash-display font-semibold text-[#25324B]">
+                <h2 className="text-[28px] md:text-[48px] font-clash-display font-semibold text-[#25324B]">
                     Featured <span className="text-[#26A4FF]">jobs</span>
                 </h2>
-                <Link to="/jobs" className="text-primary font-bold flex items-center gap-2 hover:gap-3 transition-all text-[16px]">
+                <Link to="/jobs" className="text-primary font-semibold flex items-center gap-2 hover:gap-3 transition-all text-[16px]">
                     Show all jobs <FaArrowRight />
                 </Link>
             </div>

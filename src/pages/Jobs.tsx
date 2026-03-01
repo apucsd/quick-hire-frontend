@@ -158,7 +158,7 @@ const Jobs = () => {
                                             </div>
                                             <div className="flex-grow">
                                                 <div className="flex justify-between items-start mb-2">
-                                                    <h3 className="text-[20px] font-semibold text-[#25324B] group-hover:text-primary transition-colors">
+                                                    <h3 className="text-[16px] md:text-[20px] font-semibold text-[#25324B] group-hover:text-primary transition-colors">
                                                         {job.title}
                                                         <span className="ml-3 px-3 py-1 border border-primary text-primary text-[12px] font-semibold whitespace-nowrap">
                                                             Full Time
