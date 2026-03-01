@@ -20,9 +20,9 @@ const CategoriesSection = () => {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div className="flex justify-between items-center mb-12">
                 <h2 className="text-[32px] md:text-[48px] font-clash-display font-semibold text-[#25324B]">
-                    Explore by <span className="text-primary">category</span>
+                    Explore by <span className="text-[#26A4FF]">category</span>
                 </h2>
-                <Link to="/jobs" className="text-primary font-bold flex items-center gap-2 hover:gap-3 transition-all text-[16px]">
+                <Link to="/jobs" className="text-primary font-semibold flex items-center gap-2 hover:gap-3 transition-all text-[16px]">
                     Show all jobs <FaArrowRight />
                 </Link>
             </div>
@@ -31,7 +31,7 @@ const CategoriesSection = () => {
                 {categories.map((cat, i) => (
                     <div
                         key={i}
-                        className={`hover:bg-primary hover:text-white group p-8 border transition-all duration-150 cursor-pointer`}
+                        className={`hover:bg-primary hover:text-white group p-8 border border-gray-200 transition-all duration-150 cursor-pointer`}
                     >
                         <div className={`mb-8 text-primary group-hover:text-white`}>
                             {cat.icon}

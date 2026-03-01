@@ -16,7 +16,7 @@ const TrustedCompanies = () => {
                         <img
                             src={logo.src}
                             alt={logo.name}
-                            className="h-8 md:h-10 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+                            className="h-8 md:h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
                         />
                     </div>
                 ))}
