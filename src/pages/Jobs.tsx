@@ -42,16 +42,21 @@ const Jobs = () => {
                                 value={search}
                                 onChange={(e) => {
                                     setSearch(e.target.value);
-                                    setCurrentPage(1); // Reset to page 1 on search
+                                    setCurrentPage(1);
                                 }}
                             />
                         </div>
                         <div className="flex-grow flex items-center px-4 gap-4 w-full">
                             <FaLocationDot className="text-slate-400" />
-                            <select className="w-full py-4 outline-none text-slate-800 font-medium bg-transparent appearance-none">
+                            <select onChange={(e) => {
+                                setSearch(e.target.value);
+                            }} className="w-full py-4 outline-none text-slate-800 font-medium bg-transparent appearance-none">
                                 <option>Remote</option>
-                                <option>Florence, Italy</option>
-                                <option>New York, USA</option>
+                                <option>San Francisco, CA</option>
+                                <option>
+                                    Los Angeles, CA</option>
+                                <option>Redmond, WA</option>
+                                <option>New York, NY</option>
                             </select>
                         </div>
                         <button className="w-full md:w-auto bg-[#4640DE] hover:bg-[#3b2ecc] text-white px-10 py-5 font-semibold transition-all shadow-xl shadow-blue-600/20 whitespace-nowrap">
@@ -66,18 +71,6 @@ const Jobs = () => {
                     {/* Sidebar Filter */}
                     <aside className="w-full lg:w-72 flex-shrink-0 space-y-10 font-epilogue">
                         <div>
-                            <h3 className="text-[20px] font-semibold text-[#25324B] mb-6">Type of Employment</h3>
-                            <div className="space-y-4">
-                                {["Full-time", "Part-time", "Remote", "Internship", "Contract"].map(type => (
-                                    <label key={type} className="flex items-center gap-3 cursor-pointer group">
-                                        <input type="checkbox" className="w-5 h-5 border-slate-300 rounded text-primary focus:ring-primary" defaultChecked={type === "Full-time"} />
-                                        <span className="text-[#515B6F] text-[16px] group-hover:text-primary transition-colors">{type}</span>
-                                    </label>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div>
                             <h3 className="text-[20px] font-semibold text-[#25324B] mb-6">Categories</h3>
                             <div className="space-y-4">
                                 {["All", "Engineering", "Development", "Design", "Marketing", "Business", "Technology"].map(cat => (
@@ -89,7 +82,7 @@ const Jobs = () => {
                                             checked={selectedCategory === cat}
                                             onChange={() => {
                                                 setSelectedCategory(cat);
-                                                setCurrentPage(1); // Reset to page 1 on category change
+                                                setCurrentPage(1);
                                             }}
                                         />
                                         <span className={`text-[16px] transition-colors ${selectedCategory === cat ? 'text-primary font-semibold' : 'text-[#515B6F] group-hover:text-primary'}`}>
@@ -99,6 +92,19 @@ const Jobs = () => {
                                 ))}
                             </div>
                         </div>
+                        <div>
+                            <h3 className="text-[20px] font-semibold text-[#25324B] mb-6">Type of Employment</h3>
+                            <div className="space-y-4">
+                                {["Full-time", "Part-time", "Remote", "Internship", "Contract"].map(type => (
+                                    <label key={type} className="flex items-center gap-3 cursor-pointer group">
+                                        <input type="checkbox" className="w-5 h-5 border-slate-300 rounded text-primary focus:ring-primary" defaultChecked={type === "Full-time"} />
+                                        <span className="text-[#515B6F] text-[16px] group-hover:text-primary transition-colors">{type}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+
+
 
                         <div className="p-8  bg-primary/5 border border-primary/10">
                             <h4 className="text-[18px] font-semibold text-primary mb-3">Job Alerts</h4>
@@ -153,10 +159,11 @@ const Jobs = () => {
                                                 <div className="flex justify-between items-start mb-2">
                                                     <h3 className="text-[20px] font-semibold text-[#25324B] group-hover:text-primary transition-colors">
                                                         {job.title}
+                                                        <span className="ml-3 px-3 py-1 border border-primary text-primary text-[12px] font-semibold whitespace-nowrap">
+                                                            Full Time
+                                                        </span>
                                                     </h3>
-                                                    <span className="px-3 py-1 border border-primary text-primary text-[12px] font-semibold whitespace-nowrap">
-                                                        Full Time
-                                                    </span>
+
                                                 </div>
                                                 <p className="text-[16px] text-[#7C8493] mb-4 flex items-center gap-2">
                                                     {job.company} <span className="w-1 h-1 bg-slate-300 rounded-full"></span> {job.location}
@@ -174,7 +181,7 @@ const Jobs = () => {
                                             <div className="flex flex-col items-end gap-3 shrink-0">
                                                 <Link
                                                     to={`/jobs/${job.id}`}
-                                                    className="bg-primary hover:bg-primary-hover text-white px-8 py-3 rounded-sm text-[15px] font-semibold transition-all shadow-xl shadow-primary/20 active:scale-95 text-center w-full md:w-auto"
+                                                    className="bg-primary hover:bg-primary-hover text-white px-8 py-3 text-[15px] font-semibold transition-all shadow-xl shadow-primary/20 active:scale-95 text-center w-full md:w-auto"
                                                 >
                                                     Apply
                                                 </Link>
