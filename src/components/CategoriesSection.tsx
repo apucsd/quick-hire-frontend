@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { LuPencilRuler, LuTrendingUp, LuMonitor, LuCode } from "react-icons/lu";
 import { HiOutlineSpeakerphone } from "react-icons/hi";
 import { FiCreditCard, FiBriefcase, FiUsers } from "react-icons/fi";
@@ -15,7 +15,12 @@ const categories = [
     { title: "Human Resource", count: "346 jobs available", icon: <FiUsers size={36} /> },
 ];
 
+
 const CategoriesSection = () => {
+    const navigate = useNavigate();
+    const handleNavigate = () => {
+        navigate("/jobs");
+    }
     return (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div className="flex justify-between items-center mb-12">
@@ -30,6 +35,7 @@ const CategoriesSection = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {categories.map((cat, i) => (
                     <div
+                        onClick={handleNavigate}
                         key={i}
                         className={`hover:bg-primary hover:text-white group p-8 border border-gray-200 transition-all duration-150 cursor-pointer`}
                     >
