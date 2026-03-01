@@ -24,12 +24,12 @@ const Navbar = () => {
                             Find Jobs
                         </NavLink>
                         <NavLink
-                            to="/companies"
+                            to="/admin"
                             className={({ isActive }) =>
                                 `text-[15px] font-semibold transition-colors hover:text-primary ${isActive ? 'text-primary' : 'text-slate-500'}`
                             }
                         >
-                            Browse Companies
+                            Dashboard
                         </NavLink>
                     </div>
 
