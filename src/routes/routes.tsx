@@ -6,11 +6,13 @@ import JobDetail from "../pages/JobDetail";
 import Admin from "../pages/Admin";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
+import Error from "../pages/Error";
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <MainLayout />,
+        errorElement: <Error />,
         children: [
             { path: '', element: <Home /> },
             { path: 'jobs', element: <Jobs /> },
