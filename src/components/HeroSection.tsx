@@ -1,11 +1,12 @@
 import { CiLocationOn, CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
+import { Link, useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+    const navigate = useNavigate();
 
     return (
         <section className="relative min-h-[85vh] flex items-center pt-8 sm:pb-16 md:pb-0 overflow-hidden">
-            {/* Background Pattern */}
             <img
                 src="/bg-pattern.png"
                 alt="pattern"
@@ -50,17 +51,16 @@ const HeroSection = () => {
                                 </select>
                                 <IoIosArrowDown size={24} className="text-slate-700" />
                             </div>
-                            <button className="w-full cursor-pointer md:w-auto bg-[#4A3AFF] hover:bg-[#3b2ecc] text-white px-10 py-5  font-bold transition-all shadow-xl shadow-blue-600/20 whitespace-nowrap">
+                            <button onClick={() => navigate("/jobs")} className="w-full cursor-pointer md:w-auto bg-[#4A3AFF] hover:bg-[#3b2ecc] text-white px-10 py-5  font-bold transition-all shadow-xl shadow-blue-600/20 whitespace-nowrap">
                                 Search my job
                             </button>
                         </div>
 
                         <div className="flex flex-wrap items-center gap-3 text-[15px] font-medium text-slate-400">
                             <span>Popular :</span>
-                            <span className="text-slate-600 hover:text-primary cursor-pointer px-4 py-1.5 bg-slate-50 border border-slate-100 rounded-full transition-all">UI Designer</span>
-                            <span className="text-slate-600 hover:text-primary cursor-pointer px-4 py-1.5 bg-slate-50 border border-slate-100 rounded-full transition-all">UX Researcher</span>
-                            <span className="text-slate-600 hover:text-primary cursor-pointer px-4 py-1.5 bg-slate-50 border border-slate-100 rounded-full transition-all">Android</span>
-                            <span className="text-slate-600 hover:text-primary cursor-pointer px-4 py-1.5 bg-slate-50 border border-slate-100 rounded-full transition-all">Admin</span>
+                            {["UI Designer", "UX Researcher", "Android", "Admin"].map((item, index) => (
+                                <Link to={`/jobs?search=${item}`} key={index} className="text-slate-600 hover:text-primary cursor-pointer px-4 py-1.5 bg-slate-50 border border-slate-100 rounded-full transition-all">{item}</Link>
+                            ))}
                         </div>
                     </div>
 

@@ -35,7 +35,9 @@ const FeaturedSection = () => {
                     const colorClass = colors[job?.category] || "text-[#7C8493] bg-slate-50 border-slate-200";
 
                     return (
-                        <div key={i} className="bg-white border border-slate-100 p-6 flex flex-col hover:border-primary/20 hover:shadow-xl hover:shadow-slate-200/50 transition-all cursor-pointer group">
+                        <Link
+                            to={`/jobs/${job?.id}`}
+                            key={i} className="bg-white border border-slate-100 p-6 flex flex-col hover:border-primary/20 hover:shadow-xl hover:shadow-slate-200/50 transition-all cursor-pointer group">
                             <div className="flex justify-between items-start mb-6">
                                 <div className="w-12 h-12 flex items-center justify-center">
                                     <img
@@ -64,7 +66,7 @@ const FeaturedSection = () => {
                                     {job?.category}
                                 </span>
                             </div>
-                        </div>
+                        </Link>
                     );
                 })}
             </div>
