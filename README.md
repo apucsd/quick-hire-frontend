@@ -1,73 +1,72 @@
-# React + TypeScript + Vite
+# Quick Hire - Advanced Job Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Quick Hire is a modern, high-performance job recruitment platform built with the latest web technologies. It provides a seamless experience for job seekers to find opportunities and for administrators to manage job listings.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
+[Check out the live application here](https://quick-hire-liard.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Key Features
 
-## React Compiler
+- **Dynamic Job Listings**: Real-time fetching of job data from a robust backend.
+- **Advanced Search & Filter**: Filter jobs by category, employment type, or keywords with instant results.
+- **Interactive UI**: Premium design with smooth animations, custom loading states, and responsive layouts.
+- **Job Details & Applications**: Detailed job views with an integrated application system and success feedback.
+- **Admin Dashboard**: Powerful management interface for creating, updating, and deleting job postings.
+- **Mobile Optimized**: Fully responsive design that works perfectly on all devices from mobile to desktop.
+- **Client-Side Routing**: Fast, flicker-free navigation using React Router.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Technology Stack
 
-## Expanding the ESLint configuration
+- **Frontend Core**: [React 19](https://react.dev/)
+- **State Management & Data Fetching**: [Redux Toolkit (RTK Query)](https://redux-toolkit.js.org/rtk-query/overview)
+- **Styling**: [Tailwind CSS 4.0](https://tailwindcss.com/)
+- **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
+- **Routing**: [React Router DOM 7](https://reactrouter.com/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Deployment**: [Vercel](https://vercel.com/)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📦 Installation & Setup
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Follow these steps to set up the project locally:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Clone the repository
+```bash
+git clone https://github.com/apucsd/quick-hire-frontend.git
+cd quick-hire-frontend
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 2. Install dependencies
+Using **Yarn**:
+```bash
+yarn install
 ```
+Or using **NPM**:
+```bash
+npm install
+```
+
+### 3. Environment Configuration
+Create a `.env` file in the root directory (if needed for custom backend URLs) or check `src/redux/base/baseApi.ts` to configure the API base URL.
+
+### 4. Run the development server
+```bash
+yarn dev
+```
+The application will be available at `http://localhost:5173`.
+
+### 5. Build for production
+```bash
+yarn build
+```
+
+## 📂 Project Structure
+
+- `src/components`: Reusable UI components (Navbar, Hero, Featured Section, etc.)
+- `src/pages`: Main application pages (Home, Jobs, JobDetail, Admin, Error)
+- `src/redux`: Redux store configuration and RTK Query API slices
+- `src/routes`: Application routing configuration
+- `src/assets`: Static assets and global styles
+
+## 📄 License
+This project is licensed under the MIT License.
