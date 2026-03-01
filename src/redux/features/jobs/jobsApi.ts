@@ -10,7 +10,11 @@ export const jobsApi = baseApi.injectEndpoints({
             query: (args) => {
                 const params = new URLSearchParams()
                 if (args) {
-                    args.forEach((item: TQueryParams) => params.append(item.name, item.value as string));
+                    args.forEach((item: TQueryParams) => {
+                        if (item.value) {
+                            params.append(item.name, item.value as string);
+                        }
+                    });
                 }
                 return {
                     url: '/jobs',
@@ -19,7 +23,12 @@ export const jobsApi = baseApi.injectEndpoints({
                 }
             },
             providesTags: ['Jobs'],
-            transformResponse: (response: any) => response.data,
+            transformResponse: (response: any) => {
+                return {
+                    data: response.data,
+                    meta: response.meta
+                };
+            },
         }),
 
 

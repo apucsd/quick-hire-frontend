@@ -3,11 +3,11 @@ import { FaArrowRight } from "react-icons/fa6";
 import { useGetJobsQuery } from "../redux/features/jobs/jobsApi";
 
 const FeaturedSection = () => {
-    const { data: jobs, isLoading } = useGetJobsQuery([{
+    const { data: jobsData, isLoading } = useGetJobsQuery([{
         name: "limit",
         value: 8
     }]);
-    console.log(jobs);
+
     return (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className="flex justify-between items-center mb-12">
@@ -22,7 +22,7 @@ const FeaturedSection = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {isLoading ? (
                     <div className="col-span-full py-20 text-center text-[#7C8493]">Loading featured jobs...</div>
-                ) : jobs?.map((job: any, i: number) => {
+                ) : jobsData?.data?.map((job: any, i: number) => {
                     // Category color mapping
                     const colors: Record<string, string> = {
                         "Marketing": "text-[#FFB836] bg-[#FFB836]/10 border-[#FFB836]/20",

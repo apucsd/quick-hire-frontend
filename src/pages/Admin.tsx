@@ -9,7 +9,7 @@ import JobModal from "../components/admin/JobModal";
 
 const Admin = () => {
     // Fetch Data
-    const { data: jobs, isLoading } = useGetJobsQuery([]);
+    const { data: jobsData, isLoading } = useGetJobsQuery([]);
     const { data: applications } = useGetApplicationsQuery([]);
 
     // Mutations
@@ -93,12 +93,12 @@ const Admin = () => {
                 <DashboardHeader onAddClick={() => setShowAddModal(true)} />
 
                 <QuickStats
-                    totalJobs={jobs?.length || "0"}
+                    totalJobs={jobsData?.data?.length || "0"}
                     totalApplications={applications?.length || "0"}
                 />
 
                 <JobsTable
-                    jobs={jobs}
+                    jobs={jobsData?.data}
                     isLoading={isLoading}
                     onEdit={handleEditClick}
                     onDelete={handleDelete}

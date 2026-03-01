@@ -1,79 +1,23 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaMagnifyingGlass, FaLocationDot } from "react-icons/fa6";
-import { SiRevolut, SiDropbox, SiCanva, SiX } from "react-icons/si";
-
-const allJobs = [
-    {
-        id: 1,
-        title: "Senior UI/UX Designer",
-        company: "Revolut",
-        location: "Madrid, Spain",
-        type: "Full Time",
-        category: "Design",
-        salary: "$120k - $150k",
-        icon: <SiRevolut size={32} className="text-black" />,
-        desc: "Revolut is looking for a Senior UI/UX Designer to lead our mobile experience team...",
-        tags: [
-            { label: "Design", color: "text-[#56CDAD] bg-[#56CDAD]/10 border-[#56CDAD]/20" },
-            { label: "Senior", color: "text-[#4640DE] bg-[#4640DE]/10 border-[#4640DE]/20" }
-        ]
-    },
-    {
-        id: 2,
-        title: "Frontend Developer",
-        company: "Canva",
-        location: "Ontario, Canada",
-        type: "Full Time",
-        category: "Development",
-        salary: "$140k - $180k",
-        icon: <SiCanva size={32} className="text-[#00C4CC]" />,
-        desc: "Join Canva and help us empower the world to design everything...",
-        tags: [
-            { label: "React", color: "text-[#4640DE] bg-[#4640DE]/10 border-[#4640DE]/20" },
-            { label: "Development", color: "text-[#FF6550] bg-[#FF6550]/10 border-[#FF6550]/20" }
-        ]
-    },
-    {
-        id: 3,
-        title: "Brand Designer",
-        company: "Dropbox",
-        location: "San Fransisco, US",
-        type: "Full Time",
-        category: "Design",
-        salary: "$110k - $130k",
-        icon: <SiDropbox size={32} className="text-[#0061FF]" />,
-        desc: "Dropbox is looking for a Brand Designer to help tell our story through visuals...",
-        tags: [
-            { label: "Design", color: "text-[#56CDAD] bg-[#56CDAD]/10 border-[#56CDAD]/20" }
-        ]
-    },
-    {
-        id: 4,
-        title: "Data Analyst",
-        company: "Twitter",
-        location: "San Diego, US",
-        type: "Full Time",
-        category: "Data",
-        salary: "$130k - $170k",
-        icon: <SiX size={32} className="text-[#1DA1F2]" />,
-        desc: "Twitter is looking for a Data Analyst to join our advertising performance team...",
-        tags: [
-            { label: "Technology", color: "text-[#FF6550] bg-[#FF6550]/10 border-[#FF6550]/20" }
-        ]
-    },
-];
+import { useGetJobsQuery } from "../redux/features/jobs/jobsApi";
 
 const Jobs = () => {
     const [search, setSearch] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
+    const [currentPage, setCurrentPage] = useState(1);
+    const limit = 8;
 
-    const filteredJobs = allJobs.filter(job => {
-        const matchesSearch = job.title.toLowerCase().includes(search.toLowerCase()) ||
-            job.company.toLowerCase().includes(search.toLowerCase());
-        const matchesCategory = selectedCategory === "All" || job.category === selectedCategory;
-        return matchesSearch && matchesCategory;
-    });
+    const { data: jobsData, isLoading } = useGetJobsQuery([
+        { name: "page", value: currentPage.toString() },
+        { name: "limit", value: limit.toString() },
+        { name: "searchTerm", value: search },
+        { name: "category", value: selectedCategory === "All" ? "" : selectedCategory }
+    ]);
+
+    const jobs = jobsData?.data;
+    const meta = jobsData?.meta;
 
     return (
         <div className="bg-[#F8F9FB]">
@@ -96,14 +40,17 @@ const Jobs = () => {
                                 placeholder="Job title or keyword"
                                 className="w-full py-4 outline-none text-slate-800 font-medium placeholder:text-slate-400"
                                 value={search}
-                                onChange={(e) => setSearch(e.target.value)}
+                                onChange={(e) => {
+                                    setSearch(e.target.value);
+                                    setCurrentPage(1); // Reset to page 1 on search
+                                }}
                             />
                         </div>
                         <div className="flex-grow flex items-center px-4 gap-4 w-full">
                             <FaLocationDot className="text-slate-400" />
                             <select className="w-full py-4 outline-none text-slate-800 font-medium bg-transparent appearance-none">
-                                <option>Florence, Italy</option>
                                 <option>Remote</option>
+                                <option>Florence, Italy</option>
                                 <option>New York, USA</option>
                             </select>
                         </div>
@@ -123,7 +70,7 @@ const Jobs = () => {
                             <div className="space-y-4">
                                 {["Full-time", "Part-time", "Remote", "Internship", "Contract"].map(type => (
                                     <label key={type} className="flex items-center gap-3 cursor-pointer group">
-                                        <input type="checkbox" className="w-5 h-5 border-slate-300 rounded text-primary focus:ring-primary" />
+                                        <input type="checkbox" className="w-5 h-5 border-slate-300 rounded text-primary focus:ring-primary" defaultChecked={type === "Full-time"} />
                                         <span className="text-[#515B6F] text-[16px] group-hover:text-primary transition-colors">{type}</span>
                                     </label>
                                 ))}
@@ -133,14 +80,17 @@ const Jobs = () => {
                         <div>
                             <h3 className="text-[20px] font-semibold text-[#25324B] mb-6">Categories</h3>
                             <div className="space-y-4">
-                                {["All", "Design", "Development", "Marketing", "Business"].map(cat => (
+                                {["All", "Engineering", "Development", "Design", "Marketing", "Business", "Technology"].map(cat => (
                                     <label key={cat} className="flex items-center gap-3 cursor-pointer group">
                                         <input
                                             type="radio"
                                             name="category"
                                             className="w-5 h-5 text-primary border-slate-300 focus:ring-primary"
                                             checked={selectedCategory === cat}
-                                            onChange={() => setSelectedCategory(cat)}
+                                            onChange={() => {
+                                                setSelectedCategory(cat);
+                                                setCurrentPage(1); // Reset to page 1 on category change
+                                            }}
                                         />
                                         <span className={`text-[16px] transition-colors ${selectedCategory === cat ? 'text-primary font-semibold' : 'text-[#515B6F] group-hover:text-primary'}`}>
                                             {cat}
@@ -163,7 +113,7 @@ const Jobs = () => {
                         <div className="flex justify-between items-center mb-10">
                             <div>
                                 <h2 className="text-[28px] font-clash-display font-semibold text-[#25324B]">All Jobs</h2>
-                                <p className="text-[16px] text-[#7C8493]">Showing {filteredJobs.length} results</p>
+                                <p className="text-[16px] text-[#7C8493]">Showing {jobs?.length || 0} results</p>
                             </div>
                             <div className="flex items-center gap-3">
                                 <span className="text-sm text-[#7C8493]">Sort by:</span>
@@ -175,48 +125,65 @@ const Jobs = () => {
                         </div>
 
                         <div className="grid grid-cols-1 gap-6">
-                            {filteredJobs.map(job => (
-                                <div key={job.id} className="group p-8 border border-slate-100 bg-white hover:border-primary/20 hover:shadow-xl hover:shadow-slate-200/50 transition-all flex flex-col md:flex-row md:items-center gap-8 cursor-pointer">
-                                    <div className="shrink-0">
-                                        {job.icon}
-                                    </div>
-                                    <div className="flex-grow">
-                                        <div className="flex justify-between items-start mb-2">
-                                            <h3 className="text-[20px] font-semibold text-[#25324B] group-hover:text-primary transition-colors">
-                                                {job.title}
-                                            </h3>
-                                            <span className="px-3 py-1 border border-primary text-primary text-[12px] font-semibold whitespace-nowrap">
-                                                {job.type}
-                                            </span>
-                                        </div>
-                                        <p className="text-[16px] text-[#7C8493] mb-4 flex items-center gap-2">
-                                            {job.company} <span className="w-1 h-1 bg-slate-300 rounded-full"></span> {job.location}
-                                        </p>
+                            {isLoading ? (
+                                <div className="py-20 text-center text-[#7C8493]">Loading jobs...</div>
+                            ) : jobs && jobs.length > 0 ? (
+                                jobs.map((job: any) => {
+                                    const colors: Record<string, string> = {
+                                        "Marketing": "text-[#FFB836] bg-[#FFB836]/10 border-[#FFB836]/20",
+                                        "Design": "text-[#56CDAD] bg-[#56CDAD]/10 border-[#56CDAD]/20",
+                                        "Engineering": "text-[#4640DE] bg-[#4640DE]/10 border-[#4640DE]/20",
+                                        "Development": "text-[#4640DE] bg-[#4640DE]/10 border-[#4640DE]/20",
+                                        "Technology": "text-[#FF6550] bg-[#FF6550]/10 border-[#FF6550]/20",
+                                        "Business": "text-[#4640DE] bg-[#4640DE]/10 border-[#4640DE]/20"
+                                    };
+                                    const categoryColor = colors[job.category] || "text-[#7C8493] bg-slate-50 border-slate-200";
 
-                                        <div className="flex flex-wrap gap-2">
-                                            {job.tags.map((tag, idx) => (
-                                                <span
-                                                    key={idx}
-                                                    className={`px-4 py-1 text-[12px] font-semibold rounded-full border ${tag.color}`}
+                                    return (
+                                        <div key={job.id} className="group p-8 border border-slate-100 bg-white hover:border-primary/20 hover:shadow-xl hover:shadow-slate-200/50 transition-all flex flex-col md:flex-row md:items-center gap-8 cursor-pointer">
+                                            <div className="shrink-0 w-16 h-16 flex items-center justify-center">
+                                                <img
+                                                    src={job.logo}
+                                                    alt={job.company}
+                                                    className="max-w-full max-h-full object-contain"
+                                                    onError={(e) => (e.currentTarget.src = "https://via.placeholder.com/64?text=Company")}
+                                                />
+                                            </div>
+                                            <div className="flex-grow">
+                                                <div className="flex justify-between items-start mb-2">
+                                                    <h3 className="text-[20px] font-semibold text-[#25324B] group-hover:text-primary transition-colors">
+                                                        {job.title}
+                                                    </h3>
+                                                    <span className="px-3 py-1 border border-primary text-primary text-[12px] font-semibold whitespace-nowrap">
+                                                        Full Time
+                                                    </span>
+                                                </div>
+                                                <p className="text-[16px] text-[#7C8493] mb-4 flex items-center gap-2">
+                                                    {job.company} <span className="w-1 h-1 bg-slate-300 rounded-full"></span> {job.location}
+                                                </p>
+
+                                                <div className="flex flex-wrap gap-2">
+                                                    <span className={`px-4 py-1 text-[12px] font-semibold rounded-full border ${categoryColor}`}>
+                                                        {job.category}
+                                                    </span>
+                                                    <span className="px-4 py-1 text-[12px] font-semibold rounded-full border text-[#4640DE] bg-[#4640DE]/10 border-[#4640DE]/20">
+                                                        Senior
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="flex flex-col items-end gap-3 shrink-0">
+                                                <Link
+                                                    to={`/jobs/${job.id}`}
+                                                    className="bg-primary hover:bg-primary-hover text-white px-8 py-3 rounded-sm text-[15px] font-semibold transition-all shadow-xl shadow-primary/20 active:scale-95 text-center w-full md:w-auto"
                                                 >
-                                                    {tag.label}
-                                                </span>
-                                            ))}
+                                                    Apply
+                                                </Link>
+                                                <p className="text-[14px] text-[#7C8493] font-medium">{job.salary || "Not Specified"}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex flex-col items-end gap-3 shrink-0">
-                                        <Link
-                                            to={`/jobs/${job.id}`}
-                                            className="bg-primary hover:bg-primary-hover text-white px-8 py-3 rounded-sm text-[15px] font-semibold transition-all shadow-xl shadow-primary/20 active:scale-95 text-center w-full md:w-auto"
-                                        >
-                                            Apply
-                                        </Link>
-                                        <p className="text-[14px] text-[#7C8493] font-medium">{job.salary}</p>
-                                    </div>
-                                </div>
-                            ))}
-
-                            {filteredJobs.length === 0 && (
+                                    );
+                                })
+                            ) : (
                                 <div className="py-24 text-center bg-white border border-dashed border-slate-200 rounded-3xl">
                                     <div className="text-6xl mb-6">🔍</div>
                                     <h3 className="text-[24px] font-clash-display font-semibold text-[#25324B] mb-2">No jobs found</h3>
@@ -225,12 +192,16 @@ const Jobs = () => {
                             )}
                         </div>
 
-                        {/* Pagination mockup */}
+                        {/* Pagination */}
                         <div className="mt-12 flex justify-center gap-2">
-                            {[1, 2, 3, "...", 10].map((page, i) => (
+                            {Array.from({ length: meta?.totalPage || 0 }, (_, i) => i + 1).map((page) => (
                                 <button
-                                    key={i}
-                                    className={`w-10 h-10 rounded-lg flex items-center justify-center text-sm font-semibold transition-all ${page === 1 ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-[#7C8493] hover:bg-slate-100'}`}
+                                    key={page}
+                                    onClick={() => {
+                                        setCurrentPage(page);
+                                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    }}
+                                    className={`w-10 h-10 rounded-lg flex items-center justify-center text-sm font-semibold transition-all ${currentPage === page ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-[#7C8493] hover:bg-slate-100'}`}
                                 >
                                     {page}
                                 </button>
