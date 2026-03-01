@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaMagnifyingGlass, FaLocationDot } from "react-icons/fa6";
 import { useGetJobsQuery } from "../redux/features/jobs/jobsApi";
+import Loading from "../components/ui/Loading";
 
 const Jobs = () => {
     const [search, setSearch] = useState("");
@@ -132,7 +133,7 @@ const Jobs = () => {
 
                         <div className="grid grid-cols-1 gap-6">
                             {isLoading ? (
-                                <div className="py-20 text-center text-[#7C8493]">Loading jobs...</div>
+                                <Loading />
                             ) : jobs && jobs.length > 0 ? (
                                 jobs.map((job: any) => {
                                     const colors: Record<string, string> = {

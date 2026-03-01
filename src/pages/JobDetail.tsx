@@ -4,6 +4,7 @@ import { useGetJobByIdQuery } from "../redux/features/jobs/jobsApi";
 import { useSubmitApplicationMutation } from "../redux/features/applications/applicationsApi";
 import { toast } from "react-hot-toast";
 import { FaCheck } from "react-icons/fa";
+import Loading from "../components/ui/Loading";
 
 const JobDetail = () => {
     const { id } = useParams();
@@ -41,9 +42,7 @@ const JobDetail = () => {
 
     if (isLoading) {
         return (
-            <div className="max-w-7xl mx-auto px-4 py-20 text-center text-slate-500">
-                Loading job details...
-            </div>
+            <Loading />
         );
     }
 
