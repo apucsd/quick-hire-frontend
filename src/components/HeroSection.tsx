@@ -10,7 +10,7 @@ const HeroSection = () => {
             <img
                 src="/bg-pattern.png"
                 alt="pattern"
-                className="absolute right-0 top-0 w-1/2 h-full object-contain -z-10 pointer-events-none opacity-60"
+                className="absolute hidden md:block right-0 top-0 w-1/2 h-full object-contain -z-10 pointer-events-none opacity-60"
             />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -69,12 +69,12 @@ const HeroSection = () => {
 
 
                         className="lg:col-span-5 flex justify-center lg:justify-end">
-                        <div className="absolute h-[100vh] w-[60vw] -top-20 right-0 overflow-hidden">
+                        <div className="absolute hidden md:block h-[100vh] w-[60vw] -top-20 right-0 overflow-hidden">
                             {/* pattern image */}
                             <img className=" w-full h-full z-[-1]" src="/bg-pattern.png" alt="" />
                         </div>
 
-                        <div className="relative w-full max-w-[550px]">
+                        <div className="relative hidden md:block w-full max-w-[550px]">
                             <img
                                 style={{
                                     clipPath: "polygon(0 0, 100% 0, 100% 80%, 41% 100%, 0 99%, 0% 50%)"

@@ -70,7 +70,7 @@ const Navbar = () => {
 
                             <hr className="border-slate-100 mx-4" />
                             <Link to="/" className="text-sm font-bold text-primary px-4 py-2">Login</Link>
-                            <Link to=" /admin" className="text-sm font-bold text-primary px-4 py-2">Dashboard</Link>
+                            <Link to="/admin" className="text-sm font-bold text-primary px-4 py-2">Dashboard</Link>
                             <Link to="/" className="mx-4 bg-primary text-white text-center py-3 rounded-lg font-bold shadow-lg shadow-primary/20">Sign Up</Link>
                         </div>
                     </div>
